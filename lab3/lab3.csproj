@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Core" Version="3.7.3.27" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.0.88" />
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.0" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.3.20" />
+    <PackageReference Include="AWSXRayRecorder.Core" Version="2.14.0" />
+    <PackageReference Include="AWSXRayRecorder.Handlers.AwsSdk" Version="2.12.0" />
+    <PackageReference Include="bootstrap" Version="5.3.2" />
+    <PackageReference Include="scott.munro.AWSXRayRecorder.Handlers.AwsSdk" Version="2.8.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.27" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.27" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.27" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.1" />
+  </ItemGroup>
+</Project>

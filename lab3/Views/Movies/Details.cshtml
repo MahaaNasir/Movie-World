@@ -1,0 +1,70 @@
+﻿@model Movie
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_Layout";
+}
+<img src="~/images/homeback.jpg" style="width: 100vw; height: 100vh; object-fit: cover; z-index: -1; right:0%; left:0%; position:fixed;">
+
+<h1 class="text-center">Details</h1>
+
+<section style="background-color:black; color:white;" class="jumbotron text-center">
+    <div class="container">
+        <h2>
+            @Model.MovieName</h2>
+            <form asp-controller="Movies" asp-action="DownloadMovie" asp-route-id="@Model.MovieName" method="post">
+                <h2>
+                     <span>
+                        <button type="submit" class="btn btn-info">Download</button>
+                    </span>
+                </h2>
+            </form>
+
+            <input type="hidden" name="MovieId" value="@Model.MovieName" />
+            <div style="display:flex;flex-direction:row; justify-content: center">
+                
+                <h4>
+                    <a class="btn btn-info" asp-controller="Reviews" asp-action="AddReview" asp-route-id="@Model.MovieName">Add Review</a>
+                </h4>
+            </div>
+
+
+    </div>
+</section>
+
+<div class="album py-5 bg-light">
+    <div class="container col-md-6 justify-content-center">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Rating</label>
+            <div class="col-sm-10">
+                <label class="form-control" id="showYear">@Model.Rating</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Year</label>
+            <div class="col-sm-10">
+                <label class="form-control" id="showYear">@Model.ReleaseDate</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Genre</label>
+            <div class="col-sm-10">
+                <label class="form-control" id="showGenre">@Model.Genre</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <label class="form-control" id="showDescription" style="height:200px">@Model.Description</label>
+            </div>
+        </div>
+        <br />
+        <p>
+            <div class="text-center">
+                <a asp-action="Index" asp-controller="Movies" class="btn btn-info my-2">Back to movies</a>
+            </div>
+        </p>
+    </div>
+    <div class="row justify-content-center">
+
+    </div>
+</div>

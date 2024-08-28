@@ -1,0 +1,73 @@
+﻿@model lab3.Models.Movie
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "_Layout";
+}
+<img src="~/images/homeback.jpg" style="width: 100vw; height: 100vh; object-fit: cover; z-index: -1; right:0%; left:0%; position:fixed;">
+
+<h1 style="color:white;">Delete</h1>
+
+<h3 style ="color:white;">Are you sure you want to delete this movie?</h3>
+<div style ="color:white;">
+    <h4 style="color:white;">Movie</h4>
+    <hr style="color:white;" />
+    <dl style="color:white;" class="row">
+            <dt class="col-sm-2">
+                Genre
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Genre)
+            </dd>
+
+            <dt class="col-sm-2">
+                Movie Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MovieName)
+            </dd>
+
+            <dt class="col-sm-2">
+                Movie Comments
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt class="col-sm-2">
+                Release Date
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ReleaseDate)
+            </dd>
+
+            <dt class="col-sm-2">
+                ImageUrl
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ImageUrl)
+            </dd>
+
+            <dt class="col-sm-2">
+                FilePath
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FilePath)
+            </dd>
+            <dt class="col-sm-2">
+                Rating
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Rating)
+            </dd>
+        </dl>
+
+    <form asp-action="DeleteMovie" asp-route-movieName="@Model.MovieName" method="post">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

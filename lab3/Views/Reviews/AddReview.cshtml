@@ -1,0 +1,72 @@
+﻿@model lab3.Models.Review
+@{
+    ViewData["Title"] = "Movie Web | Add Review";
+    Layout = "_MovieLayout";
+}
+<img src="~/images/homeback1.jpg" style="width: 100vw; height: 100vh; object-fit: cover; z-index: -1; right:0%; left:0%; position:fixed;">
+
+<h1 class="text-center">Add Review</h1>
+
+<section class="jumbotron text-center">
+    <div class="container">
+        <h2>@TempData["movieName"]</h2>
+    </div>
+</section>
+
+<div class="album py-5 bg-light">
+    <div class="container col-md-25">
+        <form asp-controller="Reviews" asp-action="AddReview" method="post">
+           
+
+            <div class="form-group">
+                <label asp-for="MovieRating">Rating</label>
+                <div class="form-group">
+                    <label for="rating1">
+                        <input type="radio" asp-for="MovieRating" value="1" id="rating1" /> 1
+                        <input type="radio" asp-for="MovieRating" value="2" id="rating2" /> 2
+                        <input type="radio" asp-for="MovieRating" value="3" id="rating3" /> 3
+                        <input type="radio" asp-for="MovieRating" value="4" id="rating4" /> 4
+                        <input type="radio" asp-for="MovieRating" value="5" id="rating5" /> 5
+                    </label>
+                </div>
+                <span asp-validation-for="MovieRating" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MovieName">Movie Name</label>
+                <input type="text" class="form-control" asp-for="MovieName" />
+                <span asp-validation-for="MovieName" class="text-danger"></span>
+            </div>
+          
+
+
+            <div class="form-group">
+                <label asp-for="Title">Title</label>
+                <input type="text" class="form-control" asp-for="Title" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ReviewDescription">Movie Comments</label>
+                <textarea class="form-control" asp-for="ReviewDescription" rows="5"></textarea>
+                <span asp-validation-for="ReviewDescription" class="text-danger"></span>
+            </div>
+
+           
+
+            <div class="form-group">
+                <label asp-for="UserEmail">User Email</label>
+                <input type="text" class="form-control" asp-for="UserEmail" />
+                <span asp-validation-for="UserEmail" class="text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+            <div class="text-center">
+
+                <a asp-controller="Movies" asp-action="Index" class="btn btn-secondary">Go back to movie page</a>
+            </div>
+        </form>
+    </div>
+</div>

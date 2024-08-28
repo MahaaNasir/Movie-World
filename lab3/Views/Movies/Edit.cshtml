@@ -1,0 +1,105 @@
+﻿@model lab3.Models.Movie
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Movie Web | Edit Movie";
+    Layout = "_MovieLayout";
+}
+
+<img src="~/images/homeback.jpg" style="width: 100vw; height: 100vh; object-fit: cover; z-index: -1; right:0%; left:0%; position:fixed;">
+
+<h1 style="color:white;top:20%;" class="text-center">Edit Movie </h1>
+<br>
+<section style="color:white;" class="jumbotron text-center">
+    <div style="color:white;" class="container">
+        <h2 style="color:white;" class="text-center">
+            @Model.MovieName
+        </h2>
+    </div>
+</section>
+<br>
+<br>
+<div class="row">
+    <div class="album py-5 bg-light">
+        <div class="container col-md-25 justify-content-center">
+
+            <form asp-action="Edit" asp-controller="Movies" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <label asp-for="MovieName" class="control-label">Movie Title</label>
+                    <input asp-for="MovieName" class="form-control" />
+                    <span asp-validation-for="MovieName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Genre" class="control-label">Genre</label>
+                    <select asp-for="Genre" class="form-control">
+                        <option value="">Choose a Genre</option>
+                        <option value="@lab3.Models.Genre.ANIMATION">Animation</option>
+                        <option value="@lab3.Models.Genre.ACTION">Action</option>
+                        <option value="@lab3.Models.Genre.DRAMA">Drama</option>
+                        <option value="@lab3.Models.Genre.FANTASY">Fantasy</option>
+                        <option value="@lab3.Models.Genre.COMEDY">Comedy</option>
+                        <option value="@lab3.Models.Genre.SCIENCE_FICTION">Science Fiction</option>
+                        <option value="@lab3.Models.Genre.HORROR">Horror</option>
+                        <option value="@lab3.Models.Genre.ROMANCE">Romance</option>
+                        <option value="@lab3.Models.Genre.CRIME">Crime</option>
+                        <option value="@lab3.Models.Genre.ADVENTURE">Adventure</option>
+                        <option value="@lab3.Models.Genre.THRILLER">Thriller</option>
+                    </select>
+                    <span asp-validation-for="Genre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Rating" class="control-label">Rating</label>
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" asp-for="Rating" value="1" id="rating1" /> 1
+                        </label>
+                        <label>
+                            <input type="radio" asp-for="Rating" value="2" id="rating2" /> 2
+                        </label>
+                        <label>
+                            <input type="radio" asp-for="Rating" value="3" id="rating3" /> 3
+                        </label>
+                        <label>
+                            <input type="radio" asp-for="Rating" value="4" id="rating4" /> 4
+                        </label>
+                        <label>
+                            <input type="radio" asp-for="Rating" value="5" id="rating5" /> 5
+                        </label>
+
+                    </div>
+                    <span asp-validation-for="Rating" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="ReleaseDate" class="control-label">Release Date</label>
+                    <input asp-for="ReleaseDate" class="form-control" type="date" />
+                    <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group row">
+                    <label asp-for="Description" class="control-label"> Movie Comments</label>
+                    <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label for="file" class="control-label">Movie File</label>
+                    <input type="file" name="file" id="file" class="form-control" />
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="ImageUrl" class="control-label">Image Url</label>
+                    <input asp-for="ImageUrl" class="form-control" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+                <div class="text-center">
+                    <a asp-action="Index" asp-controller="Movies" class="btn btn-info my-2">Back to movies</a>
+                    <input asp-action="Create" type="submit" value="Save" class="btn btn-info" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+

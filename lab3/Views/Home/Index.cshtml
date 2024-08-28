@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Movie World | Home Page";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Movie Web | Home Page</title>
+    <link rel="stylesheet" href="/lib/css/bootstrap.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: black;
+        }
+
+        .input-validation-error {
+            border-color: red;
+        }
+
+        /* Center the buttons vertically and horizontally */
+        .button-container {
+            position: fixed;
+            top: 50%;
+            left: 25%; /* Adjust left position */
+            transform: translate(-50%, -50%);
+        }
+
+            /* Style for the buttons */
+            .button-container ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+
+            }
+
+            .button-container li {
+                margin-bottom: 20px; /* Add space between the buttons */
+            }
+
+            .button-container .btn {
+                width: 210px; /* Set button width */
+                height: 55px; /* Set button width */
+
+                font-size: 25px; /* Increase font size */
+            }
+            p{
+            font-family: "Black Ops One", 
+            system-ui;
+            font-weight: 380;
+            color:lightskyblue;
+            font-size:60px;
+            left:30%;
+            top:40%;
+            }
+    </style>
+</head>
+<body>
+
+    <main role="main">
+        <img src="~/images/image.png" style="width: 100vw; height: 100vh; object-fit: cover; z-index: -1; left:17%; position:fixed;">
+
+        <!-- Container for buttons -->
+        <div class="button-container">
+
+            <ul>
+                <p>Movie World</p>
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <li style="top:40%; ">
+                    <a href="@Url.Action("Signin", "Users")" class="btn btn-primary" style="background-color:#4169e1;">Sign In</a>
+                </li>
+                <li style="top:55%; ">
+                    <a href="@Url.Action("Signup", "Users")" class="btn btn-primary" style="background-color:#4169e1;">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </main>
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+</body>
+</html>

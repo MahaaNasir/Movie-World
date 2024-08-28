@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Review>
+@{
+    ViewData["Title"] = "ReviewsList";
+    Layout = "_MovieLayout";
+}
+<img src="~/images/homeback1.jpg" style="width: 100vw; height: 100vh; object-fit: cover; z-index: -1; right:0%; left:0%; position:fixed;">
+
+<div class="row justify-content-center">
+    <div class="col-9">
+        <h3 class="h3 text-center" style="margin-top: 20px;">
+            @if (TempData["MovieName"] != null)
+            {
+                <span class="alert alert-danger" id="error">@TempData["MovieName"]</span>
+            } Reviews
+        </h3>
+        @if (Model == null || !Model.Any())
+        {
+            <p class="lead text-center">No Reviews Added</p>
+        }
+        else
+        {
+            @foreach (var review in Model)
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title" style="float: right;">
+                            Movie Name:
+                            @if (!string.IsNullOrEmpty(review.MovieName))
+                            {
+                                @review.MovieName
+                            }
+                            else
+                            {
+                                <text>Invalid Movie Name</text>
+                            }
+                        </h6>
+                        <h5 class="card-title">@review.MovieName</h5>
+                        <small style="float: right;" class="card-title">by @review.UserEmail</small>
+                        <p class="card-text">
+                            @review.ReviewDescription
+                        </p>
+                        @if (DateTime.Now - review.CreatedAt <= TimeSpan.FromHours(24))
+                        {
+                            <!-- Edit button -->
+                            <a asp-action="EditReview" asp-controller="Reviews" asp-route-title="@review.Title" asp-route-reviewDescription="@review.ReviewDescription" asp-route-movieName="@review.MovieName" asp-route-movieRating="@review.MovieRating" asp-route-userEmail="@review.UserEmail" class="btn btn-primary">Edit</a>
+
+                            <!-- Green text indicating editing is allowed -->
+                            <div class="text-success">You can edit this comment</div>
+                        }
+                        else
+                        {
+                            <!-- Red text indicating editing is not allowed -->
+                            <div class="text-danger">You can no longer edit this comment</div>
+                        }
+
+                    </div>
+                </div>
+                <hr>
+            }
+        }
+    </div>
+    <a asp-action="Index" asp-controller="Movies" class="btn btn-outline-danger my-2">Back to movies</a>
+</div>
+
+<style>
+    /* Custom CSS for the reviews list */
+    .card {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        margin-bottom: 0.5rem;
+        color: #333;
+    }
+
+    .card-text {
+        color: #555;
+    }
+
+    .btn-outline-danger {
+        color: #d9534f;
+        border-color: #d9534f;
+    }
+
+        .btn-outline-danger:hover {
+            background-color: #d9534f;
+            color: white;
+        }
+</style>

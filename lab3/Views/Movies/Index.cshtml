@@ -1,0 +1,225 @@
+﻿@model IEnumerable<Movie>
+@{
+    ViewData["Title"] = "Movies Collection";
+    Layout = "_MovieLayout";
+}
+
+<style>
+    /* Add custom CSS for the dark mode */
+    body {
+        background-color: #1a1a1a; /* Dark background color */
+        color: white; /* Text color */
+    }
+
+    /* Button styling */
+    .btn-logout {
+        background-color: #dc3545; /* Red color */
+        border-color: #dc3545;
+        color: white;
+    }
+
+    .btn-add-movie {
+        background-color: #007bff; /* Blue color */
+        border-color: #007bff;
+        color: white;
+    }
+
+    .btn-reviews {
+        background-color: #ffc107; /* Yellow color */
+        border-color: #ffc107;
+        color: black;
+    }
+
+</style>
+
+<main role="main">
+    <img src="~/images/homeback.jpg" style="width: 100vw; height: 100vh; object-fit: cover; z-index: -1; right:0%; left:0%; position:fixed;">
+
+    <div class="container">
+        <h1>Movie World Collections</h1>
+        <p class="lead text-muted">Download & Review Movies!</p>
+        <p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-logout my-2" style="float: right;">Sign out</a>
+            <a asp-controller="Reviews" asp-action="AddReview" class="btn btn-reviews my-2">Add Movie Review</a>
+            <form asp-action="GetReviews" asp-controller="Reviews" method="get">
+                <button class="btn btn-reviews my-2" type="submit">View Reviews</button>
+                <br>
+                <a asp-controller="Movies" asp-action="Create" class="btn btn-add-movie my-2 mx-auto d-block">Add Movie</a>
+
+            </form>
+        </p>
+    </div>
+
+    <div class="container mt-4">
+        <input type="number" id="ratingInput" class="form-control" placeholder="Enter minimun rating for a movie...">
+        <br>
+        <div class="form-group">
+            <label class="control-label">Genre</label>
+            <select id="genreSelect" class="form-control">
+                <option value="">All Genre</option>
+                <option value="Animation">Animation</option>
+                <option value="Action">Action</option>
+                <option value="Drama">Drama</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Science Fiction">Science Fiction</option>
+                <option value="Horror">Horror</option>
+                <option value="Romance">Romance</option>
+                <option value="Crime">Crime</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Thriller">Thriller</option>
+            </select>
+            <span class="text-danger"></span>
+        </div>
+
+    </div>
+
+    
+    <div class="col-md-6" id="alert" style="display:flex;justify-content:center; height:80px;">
+        @if (TempData["MovieUploaded"] != null)
+        {
+            <div class="col-md-12 alert-success " id="msg">@TempData["MovieUploaded"]</div>
+        }
+        @if (TempData["Updated"] != null)
+        {
+            <div class="col-md-12 alert-success " id="msg">@TempData["Updated"]</div>
+        }
+        @if (TempData["NoFile"] != null)
+        {
+            <div class="col-md-12 alert-danger " id="msg">@TempData["NoFile"]</div>
+        }
+        @if (TempData["Created"] != null)
+        {
+            <div class="col-md-12 alert-success " id="msg">@TempData["Created"]</div>
+        }
+    </div>
+
+    <div style="background-color:grey;" class="album py-5">
+        <div style="background-color:grey;" class="container">
+            <div style="background-color:grey;" class="row" id="movieList">
+                @foreach (var m in Model)
+                {
+                    <div style="color: darkred;" class="col-md-6 movieCard" data-rating="@m.Rating" data-genre="@m.Genre">
+                        <div class="card mb-4 shadow-sm">
+                            <img class="card-img-top" src="@m.ImageUrl" alt="@m.MovieName" style="max-width:350px;max-height:200px;">
+                            <div class="card-body">
+                                <h5 style="color: darkred;" class="card-title">
+                                    @if (m.MovieName == null)
+                                    {
+                                        @: No Name Added
+                                    }
+                                    else
+                                    {
+                                        @m.MovieName
+                                    }
+                                </h5>
+                                <div style=" color: darkred; display: flex; flex-direction: row; justify-content:space-between">
+                                    <small class="text-muted">
+                                        @if (m.Rating == 0)
+                                        {
+                                            @: No Rating Added
+                                        }
+                                        else
+                                        {
+                                            @m.Rating.ToString("0/5")
+                                        }
+                                    </small>
+                                    <small style="color: darkred;" class="text-muted">Release Date: @m.ReleaseDate</small>
+                                    <small class=" text-muted" style="float:right; color: darkred;">@m.Genre </small>
+                                </div>
+                                <span style="color: darkred;" class="card-text">
+                                    <p style="color: darkred;" class="card-text">
+                                        @if (m.Description == null)
+                                        {
+                                            @: No Descriptions Available
+                                        }
+                                        else if (m.Description.Length < 60)
+                                        {
+                                            @m.Description
+                                        }
+                                        else
+                                        {
+                                            @m.Description.Substring(0, 60)
+                                        }
+                                    </p>
+                                </span>
+                                <br />
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-outline-info btn-sm" asp-controller="Movies" asp-action="Details" asp-route-name="@m.MovieName">View</a>
+                                        <a class="btn btn-outline-info btn-sm" asp-controller="Movies" asp-action="Edit" asp-route-name="@m.MovieName">Edit</a>
+                                        <a class="btn btn-outline-info btn-sm" asp-controller="Movies" asp-action="Delete" asp-route-name="@m.MovieName">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</main>
+
+
+ @section Scripts {
+    <script>
+        // Function to filter movies based on rating input
+        document.addEventListener("DOMContentLoaded", function () {
+            var ratingInput = document.getElementById("ratingInput");
+            var movieCards = document.querySelectorAll(".movieCard");
+
+            ratingInput.addEventListener("input", function () {
+                var rating = parseInt(this.value);
+                movieCards.forEach(function (card) {
+                    var cardRating = parseInt(card.dataset.rating);
+                    if (cardRating >= rating || isNaN(rating)) { // Show all movies if rating is NaN
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            });
+
+            // Trigger filtering when the page loads
+            var event = new Event('input', {
+                bubbles: true,
+                cancelable: true,
+            });
+            ratingInput.dispatchEvent(event);
+        });
+
+       
+            document.addEventListener("DOMContentLoaded", function () {
+                var ratingInput = document.getElementById("ratingInput");
+                var genreSelect = document.getElementById("genreSelect");
+                var movieCards = document.querySelectorAll(".movieCard");
+
+                function filterMovies() {
+                    var rating = parseInt(ratingInput.value);
+                    var selectedGenre = genreSelect.value;
+
+                    movieCards.forEach(function (card) {
+                        var cardRating = parseInt(card.dataset.rating);
+                        var cardGenre = card.dataset.genre;
+
+                        // Check if the movie matches the selected genre and rating
+                        if ((cardGenre === selectedGenre || selectedGenre === "") && (isNaN(rating) || cardRating >= rating)) {
+                            card.style.display = "block";
+                        } else {
+                            card.style.display = "none";
+                        }
+                    });
+                }
+
+                // Trigger filtering when the page loads and when inputs change
+                ratingInput.addEventListener("input", filterMovies);
+                genreSelect.addEventListener("change", filterMovies);
+
+                // Trigger filtering when the page loads
+                filterMovies();
+            });
+   
+    </script>
+}
+
+}

@@ -1,0 +1,126 @@
+﻿@model lab3.Models.Movie
+
+@{
+    ViewData["Title"] = "Upload Movie";
+    Layout = "_Layout";
+}
+
+<style>
+    /* Custom CSS for the Upload Movie page */
+    body {
+        color: black; /* Set text color to white */
+    }
+
+    .form-control, .control-label, .btn {
+        color: black; /* Set text color of form controls, labels, and buttons to white */
+    }
+
+    .text-danger {
+        color: red; /* Set text color of validation messages to red */
+    }
+</style>
+
+<img src="~/images/homeback.jpg" style="width: 100vw; height: 100vh; object-fit: cover; z-index: -1; right:0%; left:0%; position:fixed;">
+
+
+<section style="background-color: black;color: white; " class="jumbotron text-center">
+    <div class="container">
+        <h2>Upload Movie</h2>
+    </div>
+</section>
+
+<div style="color: black; "  class="album py-5 bg-light">
+    <div class="container col-md-6">
+        <form asp-action="Create" asp-controller="Movies" method="post" enctype="multipart/form-data">
+
+            <div style="color: black; " class="form-group">
+                <label asp-for="MovieName" class="control-label">Movie Title</label>
+                <input asp-for="MovieName" class="form-control" />
+                <span asp-validation-for="MovieName" class="text-danger"></span>
+            </div>
+
+
+
+            <div style="color: black; " class="form-group row">
+                <label asp-for="ReleaseDate" class="control-label">Release Date</label>
+                <input asp-for="ReleaseDate" class="form-control" type="date" />
+                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Genre" class="control-label">Genre</label>
+                <select asp-for="Genre" class="form-control">
+                    <option value="">Choose a Genre</option>
+                    <option value="@lab3.Models.Genre.ANIMATION">Animation</option>
+                    <option value="@lab3.Models.Genre.ACTION">Action</option>
+                    <option value="@lab3.Models.Genre.DRAMA">Drama</option>
+                    <option value="@lab3.Models.Genre.FANTASY">Fantasy</option>
+                    <option value="@lab3.Models.Genre.COMEDY">Comedy</option>
+                    <option value="@lab3.Models.Genre.SCIENCE_FICTION">Science Fiction</option>
+                    <option value="@lab3.Models.Genre.HORROR">Horror</option>
+                    <option value="@lab3.Models.Genre.ROMANCE">Romance</option>
+                    <option value="@lab3.Models.Genre.CRIME">Crime</option>
+                    <option value="@lab3.Models.Genre.ADVENTURE">Adventure</option>
+                    <option value="@lab3.Models.Genre.THRILLER">Thriller</option>
+                </select>
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Rating" class="control-label">Rating</label>
+                <div class="form-group">
+                    <label>
+                        <input type="radio" asp-for="Rating" value="1" id="rating1" /> 1
+                    </label>
+                    <label>
+                        <input type="radio" asp-for="Rating" value="2" id="rating2" /> 2
+                    </label>
+                    <label>
+                        <input type="radio" asp-for="Rating" value="3" id="rating3" /> 3
+                    </label>
+                    <label>
+                        <input type="radio" asp-for="Rating" value="4" id="rating4" /> 4
+                    </label>
+                    <label>
+                        <input type="radio" asp-for="Rating" value="5" id="rating5" /> 5
+                    </label>
+              
+                </div>
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label">Image Url</label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="file" class="control-label">Movie File</label>
+                <input type="file" name="file" id="file" class="form-control" />
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Movie Comments</label>
+                <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <a asp-action="Index" class="btn btn-info my-2">Back to movies</a>
+                <!-- Call createTable function when the button is clicked -->
+                <button type="submit" class="btn btn-info my-2">Add Movie</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+
+    @{
+        Html.RenderPartialAsync("_ValidationScriptsPartial").Wait();
+    }
+}
